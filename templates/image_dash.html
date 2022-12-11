@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="./static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="./static/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  
+  <link href="/static/assets/css/style.css" rel="stylesheet">
+  
+
+
+  </head>
+
+<body>
+  <div class="" id="hero1">
+    <div data-aos="fade-in">
+    <div class="container">
+      <div class="form_dv">
+      <br><br>
+      <h1 class="header center green-text">SAVFOREST</h1>
+      <div class="row center">
+        <h5 class="header col s12 light">Predict the probability of Forest-Fire Occurence
+        <br>
+        </h5>
+      </div>
+     
+    <div class="row">
+     
+        <form name="myform" id="myform" method = "post" action="{{url_for('get_image')}}" enctype="multipart/form-data">
+            <input name="my_image" type="file" >
+            <button type="submit">Upload</button>
+
+            {% if prediction %}
+         <img src="{{img_path}}" height="400px" width="400px">
+	<h2> Your Prediction   : <i> {{prediction}} </i></h2>
+
+	{% endif %}
+
+        </form>
+  </div>
+      </div>
+
+      
+
+    </div>
+  </div>
+  </div>
+
+
+    <br><br>
+  </div>
+  </div>>
+
+  
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="static/js/materialize.js"></script>
+  <script src="static/js/init.js"></script>
+
+  </body>
+</html>
+
+
+
