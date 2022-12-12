@@ -131,67 +131,56 @@
 
     <!-- ======= News Section ======= -->
     <section id="news">
-      <div class="container" data-aos="fade-up">
-        <div class="row">
-          <div class="col-md-12">
-            <h3 class="section-title">News</h3>
-            <div class="section-title-divider"></div>
-            <p class="section-description">Always remain updated to the news related to the forest fire on a single
-              click
-            </p>
+      <div class="container">
+        <form action="/" method="post">
+          <div class="input-group mb-3">
+          <input type="text" class="form-control" name="keyword" placeholder="Enter keyword ...." aria-label="Recipient's username" aria-describedby="button-addon2">
+          <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
           </div>
+        </form>
         </div>
-
-        <div class="row">
-          <div class="col-lg-12 d-flex justify-content-center">
-            <ul id="portfolio-flters">
-              <li data-filter="*" class="filter-active">All</li>
-              <li data-filter=".filter-app">App</li>
-              <li data-filter=".filter-card">Card</li>
-              <li data-filter=".filter-web">Web</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="row portfolio-container">
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>App 1</h4>
-              <p>App</p>
-              <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery"
-                class="portfolio-lightbox preview-link" title="App 1"><i class="bi bi-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bi bi-link"></i></a>
+        {% if all_headlines %}
+        <center><h1>Headlines</h1></center>
+        <div class="row row-cols-1 row-cols-md-2 g-4 mx-3 my-3">
+          {% for headline in all_headlines %}
+          <div class="col">
+            <div class="card h-100">
+            <img src="{{headline['urlToImage']}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h3 class="card-title">{{headline['title']}}</h3>
+              <p class="card-text">{{headline['description']}} <a href="{{headline['url']}}" target="blank">Read More...</a></p>
+      
+      
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">{{headline['source']['name']}}</small>
+            </div>
             </div>
           </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Web 3</h4>
-              <p>Web</p>
-              <a href="assets/img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery"
-                class="portfolio-lightbox preview-link" title="Web 3"><i class="bi bi-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bi bi-link"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <img src="assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>App 2</h4>
-              <p>App</p>
-              <a href="assets/img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery"
-                class="portfolio-lightbox preview-link" title="App 2"><i class="bi bi-plus"></i></a>
-              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bi bi-link"></i></a>
-            </div>
-          </div>
-
-
+          {% endfor %}
         </div>
-
-      </div>
+        {% endif %}
+        {% if all_articles %}
+        <center><h1>Results for '{{keyword}}'</h1></center>
+        <div class="row row-cols-1 row-cols-md-2 g-4 mx-3 my-3">
+          {% for article in all_articles %}
+          <div class="col">
+            <div class="card h-100">
+            <img src="{{article['urlToImage']}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h3 class="card-title">{{article['title']}}</h3>
+              <p class="card-text">{{article['description']}} <a href="{{article['url']}}" target="blank">Read More...</a></p>
+      
+      
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">{{article['source']['name']}}</small>
+            </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
     </section><!-- End Portfolio Section -->
 
 
