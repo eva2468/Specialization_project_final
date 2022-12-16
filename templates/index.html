@@ -3,17 +3,70 @@
 
 <head>
   <!-- CSS  -->
+  <link href="./static/css/numerical.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="./static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="./static/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'></link>
   <link href="/static/assets/css/style.css" rel="stylesheet">
   
+  
+  <script>
+    function test()
+    {
+      
+      var temp=document.getElementById("temp").value;
+      var rh=document.getElementById("rh").value;
+      var wind=document.getElementById("wind").value;
+      var rain=document.getElementById("rain").value;
+      if(temp=="" || rh=="" || wind=="" ||rain=="")
+      {
+        
+        swal("Enter values...!");  
+
+        return false;
+      }
+      else if(temp<2.2 || temp> 33.3 )
+        {
+          swal("Enter value in the given range...");  
+          return false;
+        }
+      
+     else if(rh<15|| rh> 100 )
+        {
+          
+          swal("Enter value in the given range...");  
+          return false;
+        }
+     else if(wind<.49 || wind> 9.4 )
+        {
+  
+          swal("Enter value in the given range...");  
+          return false;
+        }
+      else if(rain<0 || rain> 6.4 )
+        {
+          
+          swal("Enter value in the given range...");  
+          return false;
+        } 
+
+        else{
+          return true;
+        }
+      
+    }
+  </script>
 
 
   </head>
 
 <body>
+ 
+
+<section id="hero">
+
   <div class="" id="hero1">
     <div data-aos="fade-in">
     <div class="container">
@@ -27,40 +80,59 @@
       </div>
      
     <div class="row">
-     
-    <form action='/predict' method="post">
+    <div class="form-group" data-formrun-class-if-success="has-success" data-formrun-class-if-error="has-danger" data-formrun-target="name">
+    <form action='/predict' method="post" name="form1" onsubmit="return test()" data-formrun-alert-dialog>
         <div class="input-field col s4">
-          <label for="last_name"><b>Temperature</b></label>
+          <div class="form-group" data-formrun-class-if-success="has-success" data-formrun-class-if-error="has-danger" data-formrun-target="name"></div>
+          <label for="temp"><b>Temperature</b></label>
           <br>
-          <input id="last_name" name="Temperature" placeholder="2.2-33.30 degrees Celcius"  type="text" class="validate">
+          <input id="temp" name="Temperature" placeholder="2.2-33.30 degrees Celcius"  type="text" class="validate" data-formrun-required data-formrun-class-if-success="form-control-success" data-formrun-class-if-error="form-control-danger">
+        </div>
+           </div>
+        <div class="input-field col s4">
+          <label for="rh"><b>RH</b></label>
+          <br>
+          <input id="rh" name="RH%" placeholder="RH% 15.0-100.0" type="text" class="validate">
         </div>
         <div class="input-field col s4">
-          <label for="_name"><b>RH</b></label>
+          <label for="wind"><b>Wind</b></label>
           <br>
-          <input id="_name" name="RH%" placeholder="RH% 15.0-100.0" type="text" class="validate">
+          <input id="wind" name="Wind km/hr" placeholder="Wind km/hr 0.49-9.40" type="text" class="validate">
         </div>
         <div class="input-field col s4">
-          <label for="_name"><b>Wind</b></label>
+          <label for="rain"><b>Rain</b></label>
           <br>
-          <input id="_name" name="Wind km/hr" placeholder="Wind km/hr 0.49-9.40" type="text" class="validate">
-        </div>
-        <div class="input-field col s4">
-          <label for="_name"><b>Rain</b></label>
-          <br>
-          <input id="_name" name="Rain" placeholder="Rain mm/m2 0.0-6.4" type="text" class="validate">
+          <input id="rain" name="Rain" placeholder="Rain mm/m2 0.0-6.4" type="text" class="validate">
         </div>
       </div>
 
       <div class="row center">
 
-          <button type="submit" class="btn-large waves-effect waves-light green">Predict Probability</button>
+          <button type="submit"  class="btn-large waves-effect waves-light green">Predict Probability</button>
+          <input typ="hidden"  id="mydiv" value= "{{ pred }}" > 
+          <script>
+            function result()
+            {
+
+               var geocode = document.getElementById("mydiv").value;
+               if(geocode==1)
+                   swal("Danger!", "Something went wrong, you should choose again!", "error");  
+               else
+                   swal("Safe!", "Something went wrong, you should choose again!", "success");  
+            
+              }
+            result();
+            
+          </script>
+          
       </div>
     </form>
+    </div>
   </div>
       </div>
 
-      <br>
-        {{pred}}<br>
+      
+        
 
     </div>
   </div>
@@ -69,14 +141,16 @@
 
     <br><br>
   </div>
-  </div>>
-
+  </div>
+</section>
   
 
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="static/js/materialize.js"></script>
   <script src="static/js/init.js"></script>
+  
+  
 
   </body>
 </html>

@@ -2372,6 +2372,7 @@ optgroup,
 select,
 textarea {
   font-family: sans-serif;
+  color: #ffffff;
   /* 1 */
   font-size: 100%;
   /* 1 */
@@ -6518,7 +6519,7 @@ textarea.materialize-textarea + label:after, .select-wrapper + label:after {
 }
 
 .input-field > label {
-  color: #9e9e9e;
+  color: #ffffff;
   position: absolute;
   top: 0;
   left: 0;
@@ -6614,6 +6615,7 @@ textarea.materialize-textarea + label:after, .select-wrapper + label:after {
   line-height: inherit;
   -webkit-transition: .3s background-color;
   transition: .3s background-color;
+
 }
 
 .nav-wrapper .input-field input[type=search] {
@@ -6630,7 +6632,6 @@ textarea.materialize-textarea + label:after, .select-wrapper + label:after {
   border: 0;
   -webkit-box-shadow: none;
           box-shadow: none;
-  color: #444;
 }
 
 .input-field input[type=search]:focus:not(.browser-default) + label i,

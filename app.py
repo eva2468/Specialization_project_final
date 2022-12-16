@@ -7,6 +7,7 @@ from keras.models import load_model
 import cv2
 
 
+
 app = Flask(__name__,static_url_path='/static')
 newsapi = NewsApiClient(api_key='70fdb9ba81ba40b6bda148e672898bd9')
 
@@ -33,10 +34,16 @@ def predict():
     print(int_features)
     print(final)
     out=model.predict(final)
+    print("hai",out)
     if out==1:
-        return render_template('index.html Your Forest is in Danger')
+        return render_template('index.html',pred='1')
     else:
-        return render_template('index.html Your Forest is safe')
+        return render_template('index.html',pred='0')
+		
+	
+
+	   	
+
    
 def predict_label(img_path):
     img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
@@ -72,12 +79,12 @@ def get_image():
         img.save(img_path)
         prediction =model_img.predict(predict_label(img_path))
     return render_template("image_dash.html",prediction = dic[prediction.argmax()], img_path = img_path)
+
 @app.route("/", methods=['GET', 'POST'])
 def home():
 	if request.method == "POST":
 		sources, domains = get_sources_and_domains()
 		keyword = request.form["keyword"]
-		#keyword="sports"
 		related_news = newsapi.get_everything(q=keyword,
 									sources=sources,
 									domains=domains,
@@ -92,7 +99,7 @@ def home():
 									language='en',
 									sort_by='relevancy',
 									page_size = no_of_articles)['articles']
-		return render_template("home.html", all_articles = all_articles,
+		return render_template("dash.html", all_articles = all_articles,
 							keyword=keyword)
 	else:
 		top_headlines = newsapi.get_top_headlines(country="in", language="en")

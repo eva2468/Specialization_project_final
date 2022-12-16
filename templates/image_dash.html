@@ -1,67 +1,101 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!<!DOCTYPE html>
+<html>
 <head>
-  <!-- CSS  -->
+
+	<link href="./static/css/numerical.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="./static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="./static/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  
-  <link href="/static/assets/css/style.css" rel="stylesheet">
-  
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>  
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'></link>  
+  <link href="/static/assets/css/style.css" rel="stylesheet
 
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style type="text/css">
+		
 
-  </head>
+		.maindiv{
+			width: 50%;
+			height: 450px;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			margin: 2;
+			align-items:center ;
+			transform: translate(-50%, -50%);
+			background-size: 100% 100%;
+			box-shadow: 1px 2px 10px 5px;
+			background-color: #d8c9c9;
+			opacity: 1;
+		}
+	</style>
+	<title></title>
+</head>
+<script>
+	function fileValidation() {
+		var fileInput =
+			document.getElementById('my_image');
+		 
+		var filePath = fileInput.value;
+	 
+		
 
+		if(filePath=='')
+		{
+			swal("No file selected...","","error");  
+			fileInput.value = '';
+			return false;
+
+		}
+		 
+		else
+			return true;
+	}
+</script>
 <body>
-  <div class="" id="hero1">
-    <div data-aos="fade-in">
-    <div class="container">
-      <div class="form_dv">
-      <br><br>
-      <h1 class="header center green-text">SAVFOREST</h1>
-      <div class="row center">
-        <h5 class="header col s12 light">Predict the probability of Forest-Fire Occurence
-        <br>
-        </h5>
-      </div>
-     
-    <div class="row">
-     
-        <form name="myform" id="myform" method = "post" action="{{url_for('get_image')}}" enctype="multipart/form-data">
-            <input name="my_image" type="file" >
-            <button type="submit">Upload</button>
+	
+	
 
-            {% if prediction %}
-         <img src="{{img_path}}" height="400px" width="400px">
-	<h2> Your Prediction   : <i> {{prediction}} </i></h2>
+	<div class="" id="hero1">
+	<script src="https://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js">
+	</script>
+	<div class="maindiv">
+		<h1 class="header center green-text">SAVFOREST</h1>
+		<div class="row center">
+			<h5 class="header col s12 light">Predict the probability of Forest-Fire Occurence
+			<br>
+			</h5>
+		  </div>
+		<font color="#000000">  
+        <form name="myform" id="myform" method = "post" onsubmit="return fileValidation()" action="{{url_for('get_image')}}" enctype="multipart/form-data">
+		<p>Filename:
+		<input type="file" id="my_image"  name="my_image" multiple="false" accept="image/*" id=finput>
+        <button type="submit" class="btn-large waves-effect waves-light ">Upload</button>
+		</font>
+        {% if prediction %}
+		{% if prediction== 'dense' %}
+		<script>
+			swal("Danger!", "Dense forest found, high posibility of fire", "error");  
+		</script> 
+		
+		
+		{%else%}
+		<script>
+			swal("Safe!", "Light forest found, less probability of fire", "success");  
+	
+		</script> 
+		
+		{% endif%}
 
-	{% endif %}
+     <!-- <img src="{{img_path}}" height="200px" width="200px">-->
+        
+   
 
-        </form>
-  </div>
-      </div>
-
-      
-
-    </div>
-  </div>
-  </div>
-
-
-    <br><br>
-  </div>
-  </div>>
-
-  
-
-  <!--  Scripts-->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="static/js/materialize.js"></script>
-  <script src="static/js/init.js"></script>
-
-  </body>
+   {% endif %}
+       </form>
+		</p>
+	</div>
+	</div>
+</body>
 </html>
-
-
-
